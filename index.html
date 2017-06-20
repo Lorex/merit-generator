@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title>功德無量放生系統</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 page-header text-center">
+                    <h1>功德無量放生系統</h1>
+                    <div class="alert alert-info">
+                        <p>哥只是無聊亂做的，沒想到早上醒來就爆了QQ <br>等等下班有空會來修正遊戲平衡，外加推出一些新功能，敬請期待XD</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <table class="table table-hover">
+                        <tr>
+                            <td>目前功德</td>
+                            <td>{{ point }}</td>
+                        </tr>
+                        <tr>
+                            <td>每秒產生功德</td>
+                            <td>{{ pointPerSecond }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-md-3">
+            		<img src="http://image.91wan.com/ahxyj/resource/h005/h07/img201405272121150.png" alt="Responsive image"  class="img-responsive">
+            	</div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            放生魚類！！！
+                        </div>
+                        <div class="panel-body text-center">
+                            <button class="btn btn-default" v-on:click="_addPoint">立即放生！</button>
+                            <button class="btn btn-default" v-on:click="_addPoint">今晚放生！</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+            		<img src="http://image.91wan.com/ahxyj/resource/h005/h07/img201405272121150.png" alt="Responsive image"  class="img-responsive" style=" -moz-transform: scaleX(-1);o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH; -ms-filter: FlipH">
+            	</div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>瓷器功德商店</h2>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>項目名稱</th>
+                            <th>說明</th>
+                            <th>目前等級</th>
+                            <th>升級花費</th>
+                            <th>升級</th>
+                        </tr>
+                        <tr>
+                            <td>放生手速</td>
+                            <td>提升您放生的手速，更迅速累積功德！</td>
+                            <td>{{ update._1.level }}</td>
+                            <td>{{ update._1.price }}</td>
+                            <td>
+                                <button class="btn btn-default btn-primary" v-on:click="_update_1">升級！</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>自動攙扶機</td>
+                            <td>扶老太太過馬路，積陰德！</td>
+                            <td>{{ update._2.level }} 台</td>
+                            <td>{{ update._2.price }}</td>
+                            <td>
+                                <button class="btn btn-default btn-primary" v-on:click="_update_2">購買！</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>進階自動攙扶機</td>
+                            <td>扶小正太過馬路，積積陰陰德！</td>
+                            <td>{{ update._3.level }} 台</td>
+                            <td>{{ update._3.price }}</td>
+                            <td>
+                                <button class="btn btn-default btn-primary" v-on:click="_update_3">購買！</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>感恩濕父！讚嘆濕父！</td>
+                            <td>時時刻刻感念濕父的威能，以念力放生更多魚類！</td>
+                            <td>{{ update._4.level }} 焦耳</td>
+                            <td>{{ update._4.price }}</td>
+                            <td>
+                                <button class="btn btn-default btn-default" v-on:click="_update_1" disabled>呼叫！</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>功德無量放生機</td>
+                            <td>每分鐘高達 7200 次放生！累積功德的極致夢幻逸品！</td>
+                            <td>{{ update._5.level }} 台</td>
+                            <td>{{ update._5.price }}</td>
+                            <td>
+                                <button class="btn btn-default btn-default" v-on:click="_update_1" disabled>購買！</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>網站設計：Lorex &lt;ceo@sita.tech&gt;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.js"></script>
+</body>
+
+</html>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        point: 0,
+        pointPerSecond: 0,
+
+        update: {
+            _1: {
+                level: 0,
+                price: 100,
+                amount: 1
+            },
+            _2: {
+                level: 0,
+                price: 1000,
+                amount: 0
+            },
+            _3: {
+                level: 0,
+                price: 10000,
+                amount: 0
+            },
+            _4: {
+                level: 0,
+                price: 100000,
+                amount: 0
+            },
+            _5: {
+                level: 0,
+                price: 9487487,
+                amount: 0
+            }
+        },
+    },
+
+    created: function() {
+        this._pointTicker();
+    },
+
+    methods: {
+        _pointTicker: () => {
+            var self = this;
+            setInterval(() => {
+                let a = app.update._2.amount + app.update._3.amount + app.update._4.amount + app.update._5.amount;
+                app.pointPerSecond = a;
+                app.point += a;
+            }, 1000);
+
+        },
+
+        _addPoint: () => {
+            app.point += app.update._1.amount;
+        },
+
+        _update_1: () => {
+            if (app.point >= app.update._1.price) {
+                app.point -= app.update._1.price;
+                app.update._1.level++;
+                app.update._1.amount += app.update._1.level;
+                app.update._1.price = parseInt(Math.pow(100, (app.update._1.level * 0.05 + 1)));
+            }
+        },
+
+        _update_2: () => {
+            if (app.point >= app.update._2.price) {
+                app.point -= app.update._2.price;
+                app.update._2.level++;
+                app.update._2.amount = parseInt(Math.pow(1.5, (app.update._2.level + 5)));
+                app.update._2.price = parseInt(Math.pow(1000, (app.update._2.level * 0.01 + 1)));
+            }
+        },
+
+        _update_3: () => {
+            if (app.point >= app.update._3.price) {
+                app.point -= app.update._3.price;
+                app.update._3.level++;
+                app.update._3.amount = parseInt(Math.pow(1.9, (app.update._3.level + 10)));
+                app.update._3.price = parseInt(Math.pow(10000, (app.update._3.level * 0.01 + 1)));
+            }
+        }
+    }
+})
+</script>
