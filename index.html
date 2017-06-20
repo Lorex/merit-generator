@@ -287,7 +287,7 @@ var app = new Vue({
         },
 
         _update_1: () => {
-            if (app.point >= app.update._1.price && app.update._1.level < 100) {
+            if (app.point >= app.update._1.price && app.update._1.level < 150) {
                 app.point -= app.update._1.price;
                 app.update._1.level++;
                 app.update._1.amount = parseInt(Math.pow(1.1, (app.update._1.level + 4)));
