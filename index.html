@@ -24,6 +24,7 @@
                     <div class="alert alert-success">
                         <p>更新 06/20 17:26 > 修正「放生手速」的升級曲線</p>
                         <p>更新 06/20 17:40 > 把想寫的功能先寫上去以免忘記XD</p>
+                        <p>更新 06/20 17:56 > 修正「自動攙扶機」的升級曲線</p>
                     </div>
                 </div>
             </div>
@@ -104,7 +105,7 @@
                             <td>{{ update._3.level }} 台</td>
                             <td>{{ update._3.price }}</td>
                             <td>
-                                <button class="btn btn-default btn-primary" v-on:click="_update_3">購買！</button>
+                                <button class="btn btn-default btn-primary" v-on:click="_update_3" disabled>購買！</button>
                             </td>
                         </tr>
                         <tr>
