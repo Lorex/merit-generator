@@ -18,13 +18,11 @@
                 <div class="col-md-12 page-header text-center">
                     <h1>功德無量放生系統</h1>
                     <div class="alert alert-info">
-                        <p>哥只是無聊亂做的，沒想到早上醒來就爆了QQ
-                            <br>等等下班有空會來修正遊戲平衡，外加推出一些新功能，敬請期待XD</p>
+                        <p>公告：由於修正遊戲平衡的關係，剛開始的幾次升級可能不會有顯著的功德提升。 <br>
+                        多升級幾次吧！反正這遊戲要升級很快XD</p>
                     </div>
                     <div class="alert alert-success">
-                        <p>更新 06/20 17:26 > 修正「放生手速」的升級曲線</p>
-                        <p>更新 06/20 17:40 > 把想寫的功能先寫上去以免忘記XD</p>
-                        <p>更新 06/20 17:56 > 修正「自動攙扶機」的升級曲線</p>
+                        <p>更新 06/20 18:25 > 「功德無量裝備商城」開張啦！</p>
                     </div>
                 </div>
             </div>
@@ -84,7 +82,7 @@
                         <tr>
                             <td>放生手速</td>
                             <td>提升您放生的手速，更迅速累積功德！</td>
-                            <td>1 點擊 = {{ update._1.amount }} 隻魚</td>
+                            <td>1 點擊 = {{ update._1.amount * update._1.multiplier}} 隻魚</td>
                             <td>{{ update._1.price }}</td>
                             <td>
                                 <button class="btn btn-default btn-primary" v-on:click="_update_1">升級！</button>
@@ -105,7 +103,7 @@
                             <td>{{ update._3.level }} 台</td>
                             <td>{{ update._3.price }}</td>
                             <td>
-                                <button class="btn btn-default btn-primary" v-on:click="_update_3" disabled>購買！</button>
+                                <button class="btn btn-default btn-default" v-on:click="_update_3" disabled>購買！</button>
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +121,28 @@
                             <td>{{ update._5.level }} 台</td>
                             <td>{{ update._5.price }}</td>
                             <td>
-                                <button class="btn btn-default btn-default" v-on:click="_update_1" disabled>購買！</button>
+                                <button class="btn btn-default btn-primary" v-on:click="_update_5">購買！</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>功德無量裝備商城</h2>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>裝備</th>
+                            <th>說明</th>
+                            <th>花費</th>
+                            <th>購買</th>
+                        </tr>
+                        <tr>
+                            <td>師兄的金剛杵</td>
+                            <td>使用金剛杵將魚更快的全壘打回去！點擊放生數量 x2</td>
+                            <td>66666</td>
+                            <td>
+                                <button class="btn btn-default btn-primary" v-on:click="_buy_1" :hidden="equip._1.bought">購買！</button>
                             </td>
                         </tr>
                     </table>
@@ -242,7 +261,8 @@ var app = new Vue({
             _1: {
                 level: 0,
                 price: 50,
-                amount: 1
+                amount: 1,
+                multiplier: 1
             },
             _2: {
                 level: 0,
@@ -261,10 +281,16 @@ var app = new Vue({
             },
             _5: {
                 level: 0,
-                price: 9487487,
+                price: 9487,
                 amount: 0
             }
         },
+
+        equip: {
+            _1: {
+                bought: false
+            }
+        }
     },
 
     created: function() {
@@ -283,7 +309,7 @@ var app = new Vue({
         },
 
         _addPoint: () => {
-            app.point += app.update._1.amount;
+            app.point += (app.update._1.amount * app.update._1.multiplier);
         },
 
         _update_1: () => {
@@ -310,6 +336,22 @@ var app = new Vue({
                 app.update._3.level++;
                 app.update._3.amount = parseInt(Math.pow(1.9, (app.update._3.level + 10)));
                 app.update._3.price = parseInt(Math.pow(10000, (app.update._3.level * 0.01 + 1)));
+            }
+        },
+
+        _update_5: () => {
+            if (app.point >= app.update._5.price && app.update._5.level < 1) {
+                app.point -= app.update._5.price;
+                app.update._5.level++;
+                app.update._5.amount = 7200;
+                app.update._5.price = NaN;
+            }
+        },
+
+        _buy_1: () => {
+            if (app.point >= 66666) {
+                app.update._1.multiplier = 2;
+                app.equip._1.bought = true;
             }
         }
     }
